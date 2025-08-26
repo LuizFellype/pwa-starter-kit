@@ -24,6 +24,7 @@ export function usePWA() {
 
     // Register service worker
     if ("serviceWorker" in navigator) {
+      console.log("Registering service worker...")
       navigator.serviceWorker
         .register("/sw.js")
         .then((registration) => {

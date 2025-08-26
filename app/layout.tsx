@@ -1,7 +1,7 @@
 import { Nunito } from 'next/font/google'
 import type { Metadata } from "next"
 import { ThemeProvider } from "@/components/theme-provider"
-import { PWAInstallPrompt } from "@/components/pwa-install-prompt"
+// import { PWAInstallPrompt } from "@/components/pwa-install-prompt"
 import "./globals.css"
 
 const nunitoFont = Nunito({
@@ -15,20 +15,11 @@ const RootLayout = ({ children }: Readonly<{
   return (
     <html lang="en" className={nunitoFont.className}>
       <head>
-        <meta name="application-name" content="PWA Starter Kit" />
-        <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-        <meta name="apple-mobile-web-app-title" content="PWA Starter Kit" />
-        <meta name="mobile-web-app-capable" content="yes" />
-        <meta name="msapplication-config" content="/browserconfig.xml" />
-        <meta name="msapplication-TileColor" content="#000000" />
-        <meta name="msapplication-tap-highlight" content="no" />
-
-        <link rel="apple-touch-icon" href="/icon-192.png" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/icon-192.png" />
-        <link rel="icon" type="image/png" sizes="16x16" href="/icon-192.png" />
-        <link rel="mask-icon" href="/icon-192.png" color="#000000" />
-        <link rel="shortcut icon" href="/icon-192.png" />
+        <link rel="apple-touch-icon" href="/icons/icon-192x192.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/icons/icon-192x192.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/icons/icon-192x192.png" />
+        <link rel="mask-icon" href="/icons/icon-192x192.png" color="#000000" />
+        <link rel="shortcut icon" href="/icons/icon-192x192.png" />
       </head>
 
       <body className="antialiased">
@@ -39,44 +30,65 @@ const RootLayout = ({ children }: Readonly<{
           disableTransitionOnChange
         >
           {children}
-          <PWAInstallPrompt />
+          {/* <PWAInstallPrompt /> */}
         </ThemeProvider>
       </body>
     </html>
   )
 }
 
+const APP_NAME = 'BaskSanta'
+const APP_DEFAULT_TITLE = "PWA Starter Kit";
+const APP_TITLE_TEMPLATE = "%s - Bask Santa";
+
+
 
 export const metadata: Metadata = {
-  title: "PWA Starter Kit",
+  applicationName: APP_NAME,
+  title: {
+    default: APP_DEFAULT_TITLE,
+    template: APP_TITLE_TEMPLATE,
+  },
   description: "A comprehensive starter kit with PWA capabilities, themed components, and Storybook integration",
   generator: "v0.app",
   manifest: "/manifest.json",
   keywords: ["PWA", "React", "Next.js", "Starter Kit", "Components"],
   authors: [{ name: "v0" }],
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
-    { media: "(prefers-color-scheme: dark)", color: "#000000" },
-  ],
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
-    title: "PWA Starter Kit",
+    title: APP_DEFAULT_TITLE,
   },
   formatDetection: {
     telephone: false,
   },
   openGraph: {
     type: "website",
-    siteName: "PWA Starter Kit",
-    title: "PWA Starter Kit",
+    siteName: APP_DEFAULT_TITLE,
+    title: APP_DEFAULT_TITLE,
     description: "A comprehensive starter kit with PWA capabilities",
   },
   twitter: {
     card: "summary",
-    title: "PWA Starter Kit",
+    title: APP_DEFAULT_TITLE,
     description: "A comprehensive starter kit with PWA capabilities",
   },
+    icons: [
+    {
+      url: "/icons/favicon-16x16.png",
+      rel: "icon",
+      type: "image/png",
+      sizes: "16x16",
+    },
+    {
+      url: "/icons/favicon-32x32.png",
+      rel: "icon",
+      type: "image/png",
+      sizes: "32x32",
+    },
+    {rel: "apple-touch-icon", url: "https://example.com/apple-icon.png"}
+  ],
+  other: { charSet: 'utf-8' }
 }
 
 

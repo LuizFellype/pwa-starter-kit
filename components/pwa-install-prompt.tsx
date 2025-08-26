@@ -4,6 +4,7 @@ import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Download, X } from "lucide-react"
+import { usePWA } from "@/hooks/use-pwa"
 
 interface BeforeInstallPromptEvent extends Event {
   prompt(): Promise<void>
@@ -11,16 +12,11 @@ interface BeforeInstallPromptEvent extends Event {
 }
 
 export function PWAInstallPrompt() {
+  const { isInstalled } = usePWA()
   const [deferredPrompt, setDeferredPrompt] = useState<BeforeInstallPromptEvent | null>(null)
   const [showPrompt, setShowPrompt] = useState(false)
-  const [isInstalled, setIsInstalled] = useState(false)
 
   useEffect(() => {
-
-    if (window.matchMedia("(display-mode: standalone)").matches) {
-      setIsInstalled(true)
-      return
-    }
 
     const handleBeforeInstallPrompt = (e: Event) => {
       e.preventDefault()
@@ -29,7 +25,6 @@ export function PWAInstallPrompt() {
     }
 
     const handleAppInstalled = () => {
-      setIsInstalled(true)
       setShowPrompt(false)
       setDeferredPrompt(null)
     }
@@ -60,6 +55,7 @@ export function PWAInstallPrompt() {
     setDeferredPrompt(null)
   }
 
+  console.log({isInstalled, showPrompt, deferredPrompt})
   if (isInstalled || !showPrompt || !deferredPrompt) {
     return null
   }
