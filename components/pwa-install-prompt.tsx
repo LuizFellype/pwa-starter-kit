@@ -14,14 +14,8 @@ export function PWAInstallPrompt() {
   const [deferredPrompt, setDeferredPrompt] = useState<BeforeInstallPromptEvent | null>(null)
   const [showPrompt, setShowPrompt] = useState(false)
   const [isInstalled, setIsInstalled] = useState(false)
-  const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
-    setMounted(true)
-  }, [])
-
-  useEffect(() => {
-    if (!mounted) return
 
     if (window.matchMedia("(display-mode: standalone)").matches) {
       setIsInstalled(true)
@@ -47,7 +41,7 @@ export function PWAInstallPrompt() {
       window.removeEventListener("beforeinstallprompt", handleBeforeInstallPrompt)
       window.removeEventListener("appinstalled", handleAppInstalled)
     }
-  }, [mounted])
+  }, [])
 
   const handleInstallClick = async () => {
     if (!deferredPrompt) return
@@ -66,7 +60,7 @@ export function PWAInstallPrompt() {
     setDeferredPrompt(null)
   }
 
-  if (!mounted || isInstalled || !showPrompt || !deferredPrompt) {
+  if (isInstalled || !showPrompt || !deferredPrompt) {
     return null
   }
 
