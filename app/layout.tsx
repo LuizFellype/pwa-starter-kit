@@ -1,7 +1,7 @@
 import { Nunito } from 'next/font/google'
 import type { Metadata } from "next"
 import { ThemeProvider } from "@/components/theme-provider"
-// import { PWAInstallPrompt } from "@/components/pwa-install-prompt"
+import PWAInstallPrompt from "@/components/pwa-install"
 import "./globals.css"
 
 const nunitoFont = Nunito({
@@ -29,8 +29,8 @@ const RootLayout = ({ children }: Readonly<{
           enableSystem
           disableTransitionOnChange
         >
+          <PWAInstallPrompt />
           {children}
-          {/* <PWAInstallPrompt /> */}
         </ThemeProvider>
       </body>
     </html>

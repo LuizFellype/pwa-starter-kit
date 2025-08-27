@@ -11,6 +11,7 @@ export default function HomePage() {
     <div className="min-h-screen bg-background">
       <Container size="screen" padding="lg">
         <div className="text-center mb-12">
+
           <Text variant="title" as="h1" className="text-4xl mb-4">
             PWA Starter Kit
           </Text>
